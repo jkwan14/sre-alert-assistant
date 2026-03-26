@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<!-- AI usage note: I used ChatGPT and Bootstrap documentation to help me understand which Bootstrap class options were available to use in order to get the layout I wanted and to help me debug portions of this file. All code was reviewed, edited, and understood by me. -->
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+
+        <!-- http://getbootstrap.com/docs/5.3/ -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+        <link href="/static/styles.css" rel="stylesheet">
+
+        <title>SRE Alert Assistant: {% block title %}{% endblock %}</title>
+
+    </head>
+
+
+    <body>
+
+        <nav class="bg-light border navbar navbar-expand-md navbar-light">
+            <div class="container-fluid">
+                <div class="d-flex flex-column">
+                    <a class="navbar-brand mb-0" href="/"><span class="fw-bold">SRE Alert Assistant</span></a>
+                    <small class="text-muted">AI-powered alert explanations</small>
+                </div>
+                <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbar" data-bs-toggle="collapse" type="button">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbar">
+
+                    <ul class="navbar-nav ms-auto align-items-center">
+                        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/add">Add Alert</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/knowledge_base">Saved Alerts</a></li>
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+
+        <main class="container py-5 text-center">
+            {% block main %}{% endblock %}
+        </main>
+
+        <footer class="text-center text-muted mt-5 mb-3">
+
+            SRE Alert Assistant • Built by JK
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+
+                    const greeting = document.getElementById("greeting");
+                    const greeting2 = document.getElementById("greeting2");
+                    const greeting3 = document.getElementById("greeting3");
+
+                    if (greeting) {
+                        const hour = new Date().getHours();
+                        let message = "Hi there! Please enter an alert: ";
+                        if (hour < 12) {
+                            message = "Good morning! Please enter an alert: ";
+                        } else if (hour < 18) {
+                            message = "Good afternoon! Please enter an alert: ";
+                        } else {
+                            message = "Good evening! Please enter an alert: ";
+                        }
+                        greeting.textContent = message;
+                    }
+
+                    if (greeting2) {
+                        const hour = new Date().getHours();
+                        let message = "Hi there! Please add an alert: ";
+                        if (hour < 12) {
+                            message = "Good morning! Please add an alert: ";
+                        } else if (hour < 18) {
+                            message = "Good afternoon! Please add an alert: ";
+                        } else {
+                            message = "Good evening! Please add an alert: ";
+                        }
+                        greeting2.textContent = message;
+                    }
+
+                    if (greeting3) {
+                        const hour = new Date().getHours();
+                        let message = "Hi there! Browse saved alerts: ";
+                        if (hour < 12) {
+                            message = "Good morning! Browse saved alerts: ";
+                        } else if (hour < 18) {
+                            message = "Good afternoon! Browse saved alerts: ";
+                        } else {
+                            message = "Good evening! Browse saved alerts: ";
+                        }
+                        greeting3.textContent = message;
+                    }
+                });
+            </script>
+        </footer>
+
+    </body>
+
+</html>

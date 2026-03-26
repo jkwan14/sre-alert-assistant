@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+
+{% block main %}
+
+    <h2 id="greeting" class="mb-3">Enter an alert:</h2>
+    <p class="text-muted">Enter an alert to get a beginner-friendly explanation and next steps.</p>
+
+    {% if error %}
+        <div class="alert alert-warning" role="alert">{{ error }}</div>
+    {% endif %}
+
+    <form action="/" method="post" class="mb-4">
+        <textarea autocomplete="off" autofocus class="form-control mb-4" name="alert" placeholder="Alert">{{ alert }}</textarea>
+
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+
+    {% if explanation %}
+        <div class="border rounded p-4 mt-4 text-start bg-light">
+            <h4 class="fw-bold mb-3">Alert Breakdown</h4>
+
+            <p><strong>Severity: </strong>
+                <span class="badge
+                             {% if severity == 'Low' %}bg-success
+                             {% elif severity == 'Medium' %}bg-warning text-dark
+                             {% elif severity == 'High' %}bg-danger
+                             {% else %}bg-danger fw-bold
+                             {% endif %}
+                            ">
+                    {% if severity == 'Critical' %}⚠️ {% endif %}{{ severity }}
+                </span>
+            </p>
+
+            <h5 class="mt-3">Explanation</h5>
+            <p>{{ explanation }}</p>
+
+            <h5>Possible Causes</h5>
+            <p class="result-text">{{ possible_causes }}</p>
+
+            <h5>Next Steps</h5>
+            <p class="result-text">{{ next_steps }}</p>
+
+            <h5>Source</h5>
+            <p class="result-text">{{ source }}</p>
+        </div>
+    {% endif %}
+
+
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Knowledge Base
+{% endblock %}
+
+
+{% block main %}
+    <h2 id="greeting3" class="mb-3">Saved Alerts</h2>
+
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
+
+    {% if alerts %}
+        {% for entry in alerts %}
+            <div class="border rounded p-3 mb-4 text-start">
+
+                <h3>Severity</h3>
+                <p>
+                    <span class="badge
+                                 {% if entry.severity == 'Low' %}bg-success
+                                 {% elif entry.severity == 'Medium' %}bg-warning text-dark
+                                 {% elif entry.severity == 'High' %}bg-danger
+                                 {% else %}bg-danger fw-bold
+                                 {% endif %}
+                                ">
+                        {% if entry.severity == 'Critical' %}⚠️ {% endif %}{{ entry.severity }}
+                    </span>
+                </p>
+
+                <h3>Alert</h3>
+                <p>{{ entry["alert"] }}</p>
+
+                <h3>Date Created</h3>
+                <p>{{ entry["date_created"] }}</p>
+
+                <h3>Explanation</h3>
+                <p>{{ entry["explanation"] }}</p>
+
+                <h3>Possible Causes</h3>
+                <p class="result-text">{{ entry["possible_causes"] }}</p>
+
+                <h3>Next Steps</h3>
+                <p class="result-text">{{ entry["next_steps"] }}</p>
+
+                <h3>Source</h3>
+                <p>{{ entry["source"] }}</p>
+
+
+            </div>
+
+        {% endfor %}
+    {% else %}
+        <p>No alerts in the knowledge base yet.</p>
+    {% endif %}
+
+{% endblock %}

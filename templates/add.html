@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Add
+{% endblock %}
+
+
+{% block main %}
+    <h2 id="greeting2" class="mb-3">Enter an alert:</h2>
+
+    {% if error %}
+        <div class="alert alert-warning" role="alert">{{ error }}</div>
+    {% endif %}
+    <form action="/add" method="post" class="mb-4 text-start">
+
+        <label for="severity" class="form-label">Severity:</label>
+        <select name="severity" id="severity" class="form-select mb-3">
+            <option value="" disabled {% if not severity %}selected{% endif %}>Select Severity</option>
+            <option value="Low" {% if severity == "Low" %}selected{% endif %}>Low</option>
+            <option value="Medium" {% if severity == "Medium" %}selected{% endif %}>Medium</option>
+            <option value="High" {% if severity == "High" %}selected{% endif %}>High</option>
+            <option value="Critical" {% if severity == "Critical" %}selected{% endif %}>Critical</option>
+        </select>
+
+        <textarea autocomplete="off" autofocus class="form-control mb-3" name="alert" placeholder="Alert">{{ alert }}</textarea>
+
+        <textarea autocomplete="off" class="form-control mb-3" name="explanation" placeholder="Explanation">{{ explanation }}</textarea>
+
+        <textarea autocomplete="off" class="form-control mb-3" name="possible_causes" placeholder="Possible causes">{{ possible_causes }}</textarea>
+
+        <textarea autocomplete="off" class="form-control mb-3" name="next_steps" placeholder="Next steps">{{ next_steps }}</textarea>
+
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+
+{% endblock %}
